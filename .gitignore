@@ -4,3 +4,5 @@ target/
 *.class
 .idea
 .DS_Store
+*.tsv
+*.log
