@@ -5,13 +5,19 @@ A production-grade, distributed data platform built to ingest, process, and anal
 ---
 
 ## 🏗️ System Architecture
-[ Log/Event Sources ] ---> [ GCP Pub/Sub ] ---> [ Apache Spark Structured Streaming (Scala) ]
-|
-+--------------+--------------+
-|                             |
-v                             v
-[ Google Cloud Storage (GCS) ]         [ Google BigQuery ]
-(Raw Parquet Lakehouse)           (Optimized Data Warehouse)
+```mermaid
+graph LR
+    A[Log/Event Sources] --> B(GCP Pub/Sub)
+    B --> C[Apache Spark Structured Streaming <br> Scala]
+    C --> D[Google Cloud Storage <br> Raw Parquet Lakehouse]
+    C --> E[Google BigQuery <br> Optimized Data Warehouse]
+
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style B fill:#4285F4,stroke:#333,stroke-width:1px,color:#fff
+    style C fill:#E25A28,stroke:#333,stroke-width:1px,color:#fff
+    style D fill:#34A853,stroke:#333,stroke-width:1px,color:#fff
+    style E fill:#EA4335,stroke:#333,stroke-width:1px,color:#fff
+```
 
 ### Architectural Highlights
 *   **Decoupled Ingestion:** Scales independently to handle sudden traffic spikes using GCP Pub/Sub as a high-throughput message broker.
@@ -58,7 +64,7 @@ To simulate real-world enterprise traffic without maintaining live, expensive se
 *   GCP Account with a Google Cloud Project initialized.
 *   Google Cloud SDK installed locally and authenticated (`gcloud auth application-default login`).
 *   Java Development Kit (JDK 8 or 11).
-*   SBT (Simple Build Tool).
+*   Maven.
 
 ### 1. Setup GCP Infrastructure
 ```bash
